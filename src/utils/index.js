@@ -19,7 +19,10 @@ export function param(obj, prefix) {
   const str = [];
   for (const p in obj) {
     if (obj.hasOwnProperty(p)) {
-      const k = prefix ? prefix + "[" + p + "]" : p,
+      if (obj[p] === undefined) {
+        continue;
+      }
+      const k = p,
             v = obj[p];
       if(typeof v === "object") {
         const rv = param(v, k);
